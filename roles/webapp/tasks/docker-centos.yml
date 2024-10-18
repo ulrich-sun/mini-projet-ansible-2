@@ -21,6 +21,12 @@
     enabled: yes
     gpgcheck: yes
     gpgkey: https://download.docker.com/linux/centos/gpg
+    
+- name: Add Docker CE repo
+  get_url:
+   url: https://download.docker.com/linux/centos/docker-ce.repo
+   dest: /etc/yum.repos.d/docker-ce.repo
+
 - name: update package 
   yum: 
     update_cache: yes
@@ -30,8 +36,6 @@
      - docker-ce
      - docker-ce-cli
      - containerd.io
-     - docker-buildx-plugin
-     - docker-compose-plugin
     state: present
 
 - name: start docker
