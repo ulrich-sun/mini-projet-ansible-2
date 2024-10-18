@@ -21,7 +21,7 @@
     enabled: yes
     gpgcheck: yes
     gpgkey: https://download.docker.com/linux/centos/gpg
-    
+
 - name: Add Docker CE repo
   get_url:
    url: https://download.docker.com/linux/centos/docker-ce.repo
@@ -38,11 +38,11 @@
      - containerd.io
     state: present
 
-- name: start docker
-  systemd:
-    name: docker
-    state: started
-    enabled: yes
+# - name: start docker
+#   systemd:
+#     name: docker
+#     state: started
+#     enabled: yes
 
 - name: install docker-compose
   get_url:
