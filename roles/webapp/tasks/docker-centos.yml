@@ -23,12 +23,13 @@
     key: https://download.docker.com/linux/centos/gpg
     state: present
 - name: install docker
-  package:
+  yum:
     name: 
      - docker-ce
      - docker-ce-cli
      - containerd.io
-    state: latest
+    state: present
+
 - name: start docker
   service:
     name: docker
