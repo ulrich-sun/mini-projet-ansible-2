@@ -1,6 +1,6 @@
 ---
 - name: Install Apache Web Server
-  hosts: all
+  hosts: centos
   become: true
   roles:
     - webapp

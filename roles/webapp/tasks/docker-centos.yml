@@ -1,10 +1,9 @@
 --- 
 - name: install some package 
-  package: 
-    description: docker
+  yum:
     name: "{{ item }}" 
     state: latest 
-  with_items: 
+  loop: 
     - epel-release
     - wget
     - yum-utils
