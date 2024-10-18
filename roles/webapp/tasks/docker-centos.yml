@@ -1,6 +1,7 @@
 --- 
 - name: install some package 
   package: 
+    description: docker
     name: "{{ item }}" 
     state: latest 
   with_items: 
