@@ -45,10 +45,15 @@
     groups: docker
     append: yes
   become: true
-  notify: restat docker
+  notify: restart docker
 
 - name: install docker-compose
   get_url:
-    url: https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)
+    url: https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
     dest: /usr/local/bin/docker-compose
     mode: '0755'
+- name: install docker python package
+  pip:
+    name: docker-py
+    state: present
+    executable: pip3

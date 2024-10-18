@@ -12,34 +12,41 @@
     - python3-pip 
     - lvm2 
     - device-mapper-persistent-data
-- name: add docker repository 
+
+- name: add repo docker 
   yum_repository:
-    description: docker
-    name: docker 
+    name: docker
+    description: Docker Repository
     baseurl: https://download.docker.com/linux/centos/7/x86_64/stable
-    enabled: yes 
-- name: add gpg key 
-  rpm_key:
-    key: https://download.docker.com/linux/centos/gpg
-    state: present
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: https://download.docker.com/linux/centos/gpg
+- name: update package 
+  yum: 
+    update_cache: yes
 - name: install docker
   yum:
     name: 
      - docker-ce
+     - docker.io
      - docker-ce-cli
      - containerd.io
+     - docker-buildx-plugin
+     - docker-compose-plugin
     state: present
 
 - name: start docker
-  service:
+  systemd:
     name: docker
     state: started
     enabled: yes
+
 - name: install docker-compose
   get_url:
-    url: https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)
+    url: https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
     dest: /usr/local/bin/docker-compose
     mode: '0755'
+
 - name: add user to docker group
   user:
     name: "{{ ansible_user }}"
@@ -52,3 +59,5 @@
     name: docker-py
     state: present
     executable: pip3
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
