@@ -28,7 +28,6 @@
   yum:
     name: 
      - docker-ce
-     - docker.io
      - docker-ce-cli
      - containerd.io
      - docker-buildx-plugin
